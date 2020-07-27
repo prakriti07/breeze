@@ -46,11 +46,11 @@ curl -sSL https://raw.githubusercontent.com/coreos/flannel/${flannel_version}/Do
    | sed -e "s,quay.io/coreos,{{ registry_endpoint }}/{{ registry_project }},g" > ${path}/template/kube-flannel.yml.j2
 
 echo "=== pulling flannel image ==="
-docker pull ${flannel_repo}/flannel:${flannel_version}-amd64
+docker pull ${flannel_repo}/flannel:${flannel_version}-arm64
 echo "=== flannel image is pulled successfully ==="
 
 echo "=== saving flannel image ==="
-docker save ${flannel_repo}/flannel:${flannel_version}-amd64 \
+docker save ${flannel_repo}/flannel:${flannel_version}-arm64 \
     > ${path}/file/flannel.tar
 rm ${path}/file/flannel.tar.bz2 -f
 bzip2 -z --best ${path}/file/flannel.tar
@@ -98,13 +98,13 @@ curl -sS https://raw.githubusercontent.com/kubernetes/dashboard/${dashboard_vers
 echo "=== pulling kubernetes dashboard and metrics-server images ==="
 docker pull ${dashboard_repo}/dashboard:${dashboard_version}
 docker pull ${dashboard_repo}/metrics-scraper:${metrics_scraper_version}
-docker pull ${metrics_server_repo}/metrics-server-amd64:${metrics_server_version}
+docker pull ${metrics_server_repo}/metrics-server-arm64:${metrics_server_version}
 echo "=== kubernetes dashboard and metrics-server images are pulled successfully ==="
 
 echo "=== saving kubernetes dashboard images ==="
 docker save ${dashboard_repo}/dashboard:${dashboard_version} -o ${path}/file/dashboard.tar
 docker save ${dashboard_repo}/metrics-scraper:${metrics_scraper_version} -o ${path}/file/metrics-scraper.tar
-docker save ${metrics_server_repo}/metrics-server-amd64:${metrics_server_version} -o ${path}/file/metrics-server.tar
+docker save ${metrics_server_repo}/metrics-server-arm64:${metrics_server_version} -o ${path}/file/metrics-server.tar
 rm -f ${path}/file/dashboard.tar.bz2
 rm -f ${path}/file/metrics-scraper.tar.bz2
 rm -f ${path}/file/metrics-server.tar.bz2
@@ -141,13 +141,13 @@ curl -sS https://projectcontour.io/examples/kuard.yaml \
 echo "=== pulling contour and envoyproxy images ==="
 docker pull ${contour_repo}/contour:${contour_version}
 docker pull ${contour_envoyproxy_repo}/envoy:${contour_envoyproxy_version}
-docker pull ${contour_demo_repo}/kuard-amd64:1
+docker pull ${contour_demo_repo}/kuard-arm64:1
 echo "=== contour and envoyproxy images are pulled successfully ==="
 
 echo "=== saving contour and envoyproxy images ==="
 docker save ${contour_repo}/contour:${contour_version} -o ${path}/file/contour.tar
 docker save ${contour_envoyproxy_repo}/envoy:${contour_envoyproxy_version} -o ${path}/file/contour-envoyproxy.tar
-docker save ${contour_demo_repo}/kuard-amd64:1 -o ${path}/file/contour-demo.tar
+docker save ${contour_demo_repo}/kuard-a64:1 -o ${path}/file/contour-demo.tar
 rm -f ${path}/file/contour.tar.bz2
 rm -f ${path}/file/contour-envoyproxy.tar.bz2
 rm -f ${path}/file/contour-demo.tar.bz2

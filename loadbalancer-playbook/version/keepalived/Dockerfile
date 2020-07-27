@@ -1,4 +1,5 @@
 FROM centos:8.1.1911
+RUN yum install epel-release
 RUN yum install -y keepalived sysvinit-tools nc
 COPY keepalived.sh /usr/bin/keepalived.sh
 COPY keepalived.conf /etc/keepalived/keepalived.conf

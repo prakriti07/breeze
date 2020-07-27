@@ -39,7 +39,7 @@ flannel_repo="quay.io/coreos"
 flannel_version=v`cat ${path}/components-version.txt |grep "Flannel" |awk '{print $3}'`
 
 echo "flannel_repo: ${flannel_repo}" >> ${path}/yat/all.yml.gotmpl
-echo "flannel_version: ${flannel_version}-amd64" >> ${path}/yat/all.yml.gotmpl
+echo "flannel_version: ${flannel_version}-arm64" >> ${path}/yat/all.yml.gotmpl
 echo "flannel_version_short: ${flannel_version}" >> ${path}/yat/all.yml.gotmpl
 
 curl -sSL https://raw.githubusercontent.com/coreos/flannel/${flannel_version}/Documentation/kube-flannel.yml \
@@ -159,9 +159,9 @@ echo "=== contour and envoyproxy images are saved successfully ==="
 
 echo "=== download cfssl tools ==="
 export CFSSL_URL=https://pkg.cfssl.org/R1.2
-curl -L -o cfssl ${CFSSL_URL}/cfssl_linux-amd64
-curl -L -o cfssljson ${CFSSL_URL}/cfssljson_linux-amd64
-curl -L -o cfssl-certinfo ${CFSSL_URL}/cfssl-certinfo_linux-amd64
+curl -L -o cfssl ${CFSSL_URL}/cfssl_linux-arm64
+curl -L -o cfssljson ${CFSSL_URL}/cfssljson_linux-arm64
+curl -L -o cfssl-certinfo ${CFSSL_URL}/cfssl-certinfo_linux-arm64
 chmod +x cfssl cfssljson cfssl-certinfo
 tar zcvf ${path}/file/cfssl-tools.tar.gz cfssl cfssl-certinfo cfssljson
 echo "=== cfssl tools is download successfully ==="
@@ -169,6 +169,6 @@ echo "=== cfssl tools is download successfully ==="
 helm_version=v`cat ${path}/components-version.txt |grep "Helm" |awk '{print $3}'`
 
 echo "=== download helm binary package ==="
-rm ${path}/file/helm-linux-amd64.tar.gz -f
-curl -o ${path}/file/helm-linux-amd64.tar.gz https://get.helm.sh/helm-${helm_version}-linux-amd64.tar.gz
+rm ${path}/file/helm-linux-arm64.tar.gz -f
+curl -o ${path}/file/helm-linux-arm64.tar.gz https://get.helm.sh/helm-${helm_version}-linux-arm64.tar.gz
 echo "=== helm binary package is saved successfully ==="
